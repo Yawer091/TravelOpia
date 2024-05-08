@@ -36,22 +36,6 @@ const Navbar = () => {
               Destination
             </a>
           </li>
-          <li>
-            <a
-              className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-pink-300"
-              href="#"
-            >
-              AboutUs
-            </a>
-          </li>
-          <li>
-            <a
-              className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-pink-300"
-              href="#"
-            >
-              Contact
-            </a>
-          </li>
         </ul>
         <div className="flex gap-[20px]">
           <button
