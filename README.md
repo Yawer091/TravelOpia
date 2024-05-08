@@ -73,13 +73,15 @@ Vite
 ## Application ScreenShots
 
  # HOME
-  https://github.com/Yawer091/TravelOpia/assets/151438698/7b56e5aa-1962-4bb6-a204-2779fddac958
+  ![Screenshot 2024-05-09 003549](https://github.com/Yawer091/TravelOpia/assets/151438698/67607528-ff83-4f58-a798-5f672cb05ab8)
 
 # LOGIN
-  https://github.com/Yawer091/TravelOpia/assets/151438698/1014adda-d92f-4d8d-a782-0bf5aa5cd9da
+ ![Screenshot 2024-05-09 003557](https://github.com/Yawer091/TravelOpia/assets/151438698/f4fee0bf-0c35-4083-a7f2-ff58b20fe6b7)
+
 
 # SIGNUP
-![Screenshot 2024-05-09 003549](https://github.com/Yawer091/TravelOpia/assets/151438698/67607528-ff83-4f58-a798-5f672cb05ab8)
+ ![Screenshot 2024-05-09 003607](https://github.com/Yawer091/TravelOpia/assets/151438698/e52abae1-6943-47e1-99c0-9e3a8e18015c)
+
 
 # TourData
 
