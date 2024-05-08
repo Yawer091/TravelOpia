@@ -7,34 +7,25 @@ Welcome to My project, an innovative solution revolutionizing the way people tra
 FullStack
 
 ## Directory Structure
-my-app/
-├─ backend/
-│  ├─ config/
-│  │  └─ db.js
-│  ├─ middleware/
-│  │  ├─ access.middleware.js
-│  │  └─ auth.middleware.js
-│  ├─ model/
-│  │  ├─ tour.model.js
-│  │  └─ user.model.js
-│  ├─ routes/
-│  │  ├─ trour.routes.js
-│  │  └─ user.routes.js
-│  └─ index.js
-└─ frontend/
-   ├─ src/
-   │  ├─ assets/
-   │  │  └─ img/
-   │  ├─ Components/
-   │  │  ├─ Home.tsx
-   │  │  ├─ Footer.tsx
-   │  │  ├─ TravelForm.tsx
-   │  │  ├─ Navbar.tsx
-   │  │  └─ SignUp.tsx 
-   │  ├─ App.tsx
-   │  ├─ main.tsx
-   │  └─ index.html
-   └─ Readme.md
+HomeChef/<br>
+├─ backend/<br>
+│  ├─ config/<br>
+│  ├─ controllers/<br>
+│  ├─ middlewares/<br>
+│  ├─ models/<br>
+│  ├─ routes/<br>
+│  ├─ index.js<br>
+│  └─ package.json<br>
+└─ frontend/<br>
+|&nbsp;&nbsp;&nbsp;├─ public/<br>
+|&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ images/<br>
+|&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ index.html<br>
+|&nbsp;&nbsp;&nbsp;├─ src/<br>
+|&nbsp;&nbsp;&nbsp;├─ .env<br>
+|&nbsp;&nbsp;&nbsp;├─ .gitignore<br>
+|&nbsp;&nbsp;&nbsp;├─ package-lock.json<br>
+|&nbsp;&nbsp;&nbsp;└─ package.json<br>
+
 
 
 ## Deplolyed App
@@ -80,16 +71,18 @@ Vite
 ```
 
 ## Application ScreenShots
- <h1>HOME</h1>
-![Screenshot 2024-05-09 003607](https://github.com/Yawer091/TravelOpia/assets/151438698/7b56e5aa-1962-4bb6-a204-2779fddac958)
 
-<h1>LOGIN</h1>
-![Screenshot 2024-05-09 003557](https://github.com/Yawer091/TravelOpia/assets/151438698/1014adda-d92f-4d8d-a782-0bf5aa5cd9da)
+ # HOME
+  https://github.com/Yawer091/TravelOpia/assets/151438698/7b56e5aa-1962-4bb6-a204-2779fddac958
 
-<h1>SIGNUP</h1>
+# LOGIN
+  https://github.com/Yawer091/TravelOpia/assets/151438698/1014adda-d92f-4d8d-a782-0bf5aa5cd9da
+
+# SIGNUP
 ![Screenshot 2024-05-09 003549](https://github.com/Yawer091/TravelOpia/assets/151438698/67607528-ff83-4f58-a798-5f672cb05ab8)
 
-<h1>TourData</h1>
+# TourData
+
 ![Screenshot 2024-05-09 003625](https://github.com/Yawer091/TravelOpia/assets/151438698/300f1588-d5fc-4dcd-b5be-079f3f183a31)
 
 
