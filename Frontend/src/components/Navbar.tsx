@@ -1,88 +1,153 @@
-import { useState } from "react";
-import { Login } from "../pages/Login";
-import { SignUp } from "../pages/Signup";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Modal } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 const Navbar = () => {
-  const [showModal, setShowModal] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const navigate = useNavigate();
 
-  const handleModal = (modal: string) => {
-    setShowModal(modal);
+  const userData = localStorage.getItem("user");
+  const user = userData ? JSON.parse(userData) : null;
+  const isAuth = user !== null;
+  const isAdmin = isAuth && user.role === "admin";
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
-  const closeModal = () => {
-    setShowModal(null);
+  const handleScroll = () => {
+    setIsScrolled(window.pageYOffset > 0);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    closeMenu();
+    navigate("/");
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="bg-gray-900 text-white">
-      <nav className="flex justify-between w-[90%] m-auto p-[10px] items-center">
-        <div className="text-[42px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-          <a href="HOME"> TravelOpia</a>
-        </div>
-        <ul className="flex gap-[30px] text-[24px]">
-          <li>
-            <a
-              href="#"
-              className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-pink-300"
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-pink-300"
-              href="#"
-            >
-              Destination
-            </a>
-          </li>
-        </ul>
-        <div className="flex gap-[20px]">
-          <button
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-            onClick={() => handleModal("login")}
+    <header className={`navbar-header ${isScrolled ? "navbar-sticky" : ""}`}>
+      <div className="bg-black mx-auto px-[20px] py-[16px] flex justify-between items-center ">
+        <Link
+          to="/"
+          className="text-[36px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
+          onClick={closeMenu}
+        >
+          TravelOpia
+        </Link>
+        <div className="hidden md:flex items-center gap-4">
+          <Link
+            to="/"
+            className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-pink-300 text-[24px] ml-[30px]"
+            onClick={closeMenu}
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            Home
+          </Link>
+          {isAdmin && (
+            <Link
+              to="/enquiries"
+              className="navbar-link text-white"
+              onClick={closeMenu}
+            >
+              View Tours
+            </Link>
+          )}
+          {isAuth ? (
+            <>
+              <button
+                className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-pink-300 text-[24px] "
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+              <UserOutlined
+                className="profile-icon text-white"
+                onClick={showModal}
+                style={{
+                  fontSize: "18px",
+                  cursor: "pointer",
+                  backgroundColor: "white",
+                  padding: "8px",
+                  borderRadius: "50%",
+                }}
+              />
+              <Modal
+                title="USER PROFILE"
+                open={isModalVisible}
+                onCancel={handleCancel}
+                footer={null}
+              >
+                <p>Name: {user.fullName}</p>
+                <p>Email:{user.email}</p>
+              </Modal>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-pink-300 text-[24px] mr-[20px] "
+              onClick={closeMenu}
+            >
               Login
-            </span>
-          </button>
-          <button
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
-            onClick={() => handleModal("signup")}
-          >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              SignUp
-            </span>
-          </button>
+            </Link>
+          )}
         </div>
-      </nav>
-      {showModal === "login" && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg w-[500px] h-[500px] relative">
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-              onClick={closeModal}
+        <div className="md:hidden flex items-center">
+          <i
+            className="fa-solid fa-bars navbar-menu-icon text-white text-2xl"
+            onClick={toggleMenu}
+          ></i>
+        </div>
+      </div>
+      {/* Mobile Menu */}
+      <div className={`md:hidden ${isMenuOpen ? "block" : "hidden"} bg-black`}>
+        <div className="container mx-auto px-4 py-2">
+          <Link to="/" className="block text-white py-2" onClick={closeMenu}>
+            Home
+          </Link>
+          {isAdmin && (
+            <Link
+              to="/enquiries"
+              className="block text-white py-2"
+              onClick={closeMenu}
             >
-              ✖️
+              View Tours
+            </Link>
+          )}
+          {isAuth ? (
+            <button className="block text-white py-2" onClick={handleLogout}>
+              Logout
             </button>
-            <Login />
-          </div>
-        </div>
-      )}
-      {showModal === "signup" && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-          <div className="bg-white px-8  rounded-lg w-[500px] h-[500px] relative">
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-              onClick={closeModal}
+          ) : (
+            <Link
+              to="/login"
+              className="block text-white py-2"
+              onClick={closeMenu}
             >
-              ✖️
-            </button>
-            <SignUp />
-          </div>
+              Login
+            </Link>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </header>
   );
 };
 

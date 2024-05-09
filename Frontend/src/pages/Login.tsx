@@ -1,78 +1,95 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Button, Form, Input, notification } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-const API_BASE_URL = "https://travelopia-0v99.onrender.com";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
+  const onFinish = async (values: any) => {
+    setLoading(true);
     try {
-      const response = await axios.post(`${API_BASE_URL}/login`, {
-        email,
-        password,
+      const response = await axios.post(
+        "https://travelopia-0v99.onrender.com/login",
+        {
+          email: values.email,
+          password: values.password,
+        }
+      );
+      if (response.status === 200) {
+        const { token, user } = response.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        notification.success({
+          placement: "bottomLeft",
+          message: "Login Successful",
+          description: "You have successfully logged in!",
+        });
+        navigate("/");
+      }
+    } catch (error: any) {
+      notification.error({
+        placement: "bottomLeft",
+        message: "Login Failed",
+        description:
+          error.response.data.message || "An error occurred during login.",
       });
-      console.log(response.data);
-    } catch (error) {
-      console.error("Login error:");
     }
+    setLoading(false);
   };
 
   return (
-    <div className="h-[400px] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Log in to your account
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={(e) => e.preventDefault()}>
-          <input type="hidden" name="remember" value="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={handleLogin}
+    <div className=" w-[80%] m-auto flex justify-between p-8">
+      <div className="w-[40%] flex flex-col justify-center p-[10px]">
+        <h1 className="text-[26px] font-semibold mb-4">
+          WELCOME TO TRAVELOPIA
+        </h1>
+        <p className="text-[16px] text-gray-600 mb-4 text-center">
+          Login To Book You Destination Holiday
+        </p>
+        <Form form={form} onFinish={onFinish} layout="vertical">
+          <Form.Item
+            name="email"
+            className="border-[1px] border-gray-300 rounded-md"
+            rules={[{ required: true, message: "Please enter your Email ID!" }]}
+          >
+            <Input placeholder="Enter your Email ID" className="text-black " />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: "Please enter your password!" }]}
+          >
+            <Input.Password placeholder="Enter your password" />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              loading={loading}
+              htmlType="submit"
+              className="w-full"
             >
-              Sign in
-            </button>
-          </div>
-        </form>
+              Login
+            </Button>
+          </Form.Item>
+        </Form>
+        <Link
+          to="/register"
+          className="w-[60%] mx-auto  bg-orange-500 text-white text-center p-[10px] rounded-md hover:bg-orange-300 hover:text-orange-500 transition duration-300"
+        >
+          Register now
+        </Link>
+      </div>
+      <div className="w-1/2 ">
+        <img
+          src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D"
+          alt="login-img"
+          className="w-[80%] rounded-lg h-[400px] m-auto"
+        />
       </div>
     </div>
   );
 };
-export { Login };
+
+export default Login;
