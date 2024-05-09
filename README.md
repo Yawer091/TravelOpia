@@ -44,7 +44,7 @@ Backend:  https://travelopia-0v99.onrender.com
 - Admin Profile: Admin can handle Server Data
 
 ## Admin credentials
-  <p>login: admin@admin.com</p>
+  <p>login: admin@gmail.com</p>
   <p>password: admin</p>
 
   
@@ -73,19 +73,22 @@ Vite
 ## Application ScreenShots
 
  # HOME
-  ![Screenshot 2024-05-09 003549](https://github.com/Yawer091/TravelOpia/assets/151438698/67607528-ff83-4f58-a798-5f672cb05ab8)
+  ![image](https://github.com/Yawer091/TravelOpia/assets/151438698/b755522d-e79d-44c0-8ebe-45c2d14fed0f)
+
 
 # LOGIN
- ![Screenshot 2024-05-09 003557](https://github.com/Yawer091/TravelOpia/assets/151438698/f4fee0bf-0c35-4083-a7f2-ff58b20fe6b7)
+ ![image](https://github.com/Yawer091/TravelOpia/assets/151438698/9be1491e-1915-4a61-9cb0-d4c10edd1054)
+
 
 
 # SIGNUP
- ![Screenshot 2024-05-09 003607](https://github.com/Yawer091/TravelOpia/assets/151438698/e52abae1-6943-47e1-99c0-9e3a8e18015c)
+ ![image](https://github.com/Yawer091/TravelOpia/assets/151438698/139e3b8a-cc66-432e-89e5-0532eab9061d)
+
 
 
 # TourData
+![image](https://github.com/Yawer091/TravelOpia/assets/151438698/743cede5-6c4e-40b6-86d6-9f48019bf589)
 
-![Screenshot 2024-05-09 003625](https://github.com/Yawer091/TravelOpia/assets/151438698/300f1588-d5fc-4dcd-b5be-079f3f183a31)
 
 
 
@@ -96,6 +99,7 @@ List and provide a brief overview of the technologies used in the project.
 - React.js
 - TypeScript
 - Tailwind
+- Ant Design
 - ChakraUI
 - Node js
 - Express
