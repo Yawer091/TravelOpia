@@ -36,11 +36,8 @@ Backend:  https://travelopia-0v99.onrender.com
 ## Features
 
 - User Authentication: Secure user registration and login.
-
 - Booking System: Easy booking process
-- 
 - User Profiles: guests can create profiles and manage bookings.
-- 
 - Admin Profile: Admin can handle Server Data
 
 ## Admin credentials
